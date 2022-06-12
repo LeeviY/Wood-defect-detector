@@ -40,13 +40,15 @@ def cut_perfect(image: Image) -> list:
     x_offset = (image_width % size) / 2
     y_offset = (image_height % size) / 2
 
-    for i in range(0, image_width % size):
-        for j in range(0, image_height % size):
+    for i in range(0, int(image_width / size)):
+        for j in range(0, int(image_height / size)):
             x = x_offset + i * size
             y = y_offset + j * size
             box_dim = (x, y, x + size, y + size)
             crp_image = crop_object(box_dim, image)
             images.append(crp_image)
+
+    return images
 
 
 dirname = os.path.dirname(__file__)
@@ -103,7 +105,8 @@ for filename in path.glob('*'):
             # check if box size is legal
             if check_box(box_dim):
                 crp_image = crop_object(box_dim, input_image)
-                crp_image.save(dst_dir.joinpath(label, (id + "_" + str(line_count) + ".bmp")))
+                resized_image = crp_image.resize((300, 300))
+                resized_image.save(dst_dir.joinpath(label, (id + "_" + str(line_count) + ".bmp")))
             else:
                 print(id, "invalid area")
             line_count += 1

@@ -10,7 +10,7 @@ new_model = tf.keras.models.load_model(model_path + '\\saved_model\\my_model\\')
 new_model.summary()
 
 img = tf.keras.utils.load_img(
-    Path.cwd().joinpath("wood_photo\knot_with_crack\\100000073_1.bmp"), target_size=(128, 350)
+    Path.cwd().joinpath("wood_photo\crack\\99300074_0.bmp"), target_size=(300, 300, 3)
 )
 
 img_array = tf.keras.utils.img_to_array(img)
@@ -19,7 +19,7 @@ img_array = tf.expand_dims(img_array, 0) # Create a batch
 predictions = new_model.predict(img_array)
 score = tf.nn.softmax(predictions[0])
 
-class_names = ['Crack', 'Dead_Knot', 'Knot_missing', 'Live_Knot', 'Marrow', 'Quartzity', 'knot_with_crack', 'resin']
+class_names = ['crack', 'knot', 'spot']
 
 print(
     "This image most likely belongs to {} with a {:.2f} percent confidence."
