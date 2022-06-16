@@ -2,6 +2,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+import tkinter as tk
 
 import tensorflow as tf
 import keras
@@ -33,7 +34,8 @@ new_model = tf.keras.models.load_model(dir_path + '\\saved_model\\my_model\\')
 # Check its architecture
 new_model.summary()
 
-img_id = "100100046"
+#img_id = "100100046"
+img_id = "101100008"
 img_dir = Path(dir_path).joinpath("Images", img_id + ".bmp")
 
 # splice input image into validation set
